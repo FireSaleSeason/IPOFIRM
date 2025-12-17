@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get free, instant alerts on the hottest upcoming IPOs before they hit the market. Stay ahead with independent research, curated watchlists, and exclusive insights.">
+  <title>InvestorStream - IPO Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --background: hsl(0, 0%, 100%);
+      --foreground: hsl(222, 47%, 11%);
+      --card: hsl(0, 0%, 100%);
+      --card-foreground: hsl(222, 47%, 11%);
+      --primary: hsl(217, 91%, 60%);
+      --primary-dark: hsl(217, 91%, 40%);
+      --primary-foreground: hsl(0, 0%, 100%);
+      --muted: hsl(210, 40%, 96%);
+      --muted-foreground: hsl(215, 16%, 47%);
+      --border: hsl(214, 32%, 91%);
+      --blue-50: hsl(214, 95%, 97%);
+      --blue-100: hsl(213, 93%, 94%);
+      --blue-600: hsl(217, 91%, 50%);
+      --blue-700: hsl(217, 91%, 40%);
+      --amber-50: hsl(48, 100%, 96%);
+      --amber-100: hsl(48, 96%, 89%);
+      --amber-600: hsl(32, 95%, 44%);
+      --amber-900: hsl(22, 78%, 31%);
+      --green-500: hsl(142, 71%, 45%);
+      --yellow-400: hsl(48, 96%, 53%);
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; }
+    
+    /* Container */
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    
+    .btn-white {
+      background: white;
+      color: hsl(217, 91%, 40%);
+    }
+    .btn-white:hover { background: hsl(214, 95%, 97%); }
+    
+    .btn-outline-white {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+    
+    .btn-lg {
+      padding: 16px 32px;
+      font-size: 16px;
+    }
+    
+    .btn-xl {
+      padding: 20px 48px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 9999px;
+      background: var(--muted);
+      color: var(--foreground);
+    }
+    
+    .badge-blue {
+      background: var(--blue-100);
+      color: hsl(217, 91%, 30%);
+    }
+    
+    .badge-amber {
+      background: var(--amber-100);
+      color: var(--amber-900);
+    }
+    
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    /* Icons (inline SVG) */
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .icon-sm { width: 16px; height: 16px; }
+    .icon-lg { width: 24px; height: 24px; }
+    .icon-xl { width: 32px; height: 32px; }
+    
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-placeholder {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, hsl(217, 91%, 60%), hsl(217, 91%, 40%));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    .logo-text h1 {
+      font-size: 18px;
+      color: hsl(222, 47%, 11%);
+    }
+    
+    .logo-text p {
+      font-size: 11px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 100px 16px 60px;
+      background: linear-gradient(135deg, hsl(210, 100%, 28%) 0%, hsl(210, 100%, 40%) 50%, hsl(210, 100%, 45%) 100%);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(10px); }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .hero h2 {
+      font-size: clamp(28px, 5vw, 56px);
+      margin-bottom: 20px;
+    }
+    
+    .hero h2 span { color: hsl(210, 100%, 85%); }
+    
+    .hero p {
+      font-size: clamp(14px, 2vw, 18px);
+      color: hsl(210, 100%, 90%);
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+    
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    
+    .hero-badge svg { opacity: 0.8; }
+    
+    /* Live Alert Card */
+    .live-alert-card {
+      background: white;
+      color: var(--foreground);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 700px;
+      margin: 48px auto 0;
+      text-align: left;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+    
+    .live-alert-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green-500);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .live-alert-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .live-alert-card > p { color: var(--muted-foreground); margin-bottom: 16px; }
+    
+    .live-alert-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    /* Section Styles */
+    .section {
+      padding: 60px 16px;
+    }
+    
+    .section-alt {
+      background: linear-gradient(to bottom, var(--background), var(--muted));
+    }
+    
+    .section-blue {
+      background: hsl(214, 95%, 97%);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-header h2 {
+      font-size: clamp(24px, 4vw, 42px);
+      margin-bottom: 16px;
+    }
+    
+    .section-header h2 span { color: var(--primary); }
+    
+    .section-header p {
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--muted-foreground);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    .stat-card .value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    
+    .stat-card .label {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      margin-bottom: 16px;
+    }
+    
+    .stat-card .secondary-value {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .stat-card .secondary-label {
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+    }
+    
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: hsl(217, 91%, 95%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    .feature-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    
+    .feature-card p {
+      color: var(--muted-foreground);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(to right, hsl(210, 100%, 19%), hsl(210, 100%, 28%));
+      color: white;
+      border-radius: 24px;
+      padding: 48px;
+      text-align: center;
+      margin: 0 16px;
+    }
+    
+    .cta-section h3 {
+      font-size: clamp(20px, 3vw, 32px);
+      margin-bottom: 16px;
+    }
+    
+    .cta-section p {
+      font-size: clamp(14px, 2vw, 18px);
+      color: hsl(210, 100%, 85%);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    
+    /* Alert Cards */
+    .alert-card {
+      background: rgba(239, 246, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(191, 219, 254, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .alert-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    
+    .alert-indicator {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .alert-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .alert-content {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .alert-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .alert-body { flex: 1; }
+    
+    .alert-body h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: black;
+    }
+    
+    .alert-body p {
+      color: hsl(215, 25%, 35%);
+      margin-bottom: 16px;
+    }
+    
+    .alert-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .alert-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: hsl(215, 16%, 47%);
+    }
+    
+    .btn-link {
+      background: none;
+      border: none;
+      color: hsl(217, 91%, 50%);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+    }
+    
+    .btn-link:hover { color: hsl(217, 91%, 40%); }
+    
+    /* Differentiators */
+    .differentiators {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      text-align: center;
+    }
+    
+    .diff-item .diff-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--blue-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    
+    .diff-item h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    
+    .diff-item p {
+      font-size: 14px;
+      color: var(--muted-foreground);
+    }
+    
+    /* FAQ */
+    .faq-list { max-width: 800px; margin: 0 auto; }
+    
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .faq-question::after {
+      content: '+';
+      font-size: 24px;
+      color: var(--muted-foreground);
+    }
+    
+    .faq-item.open .faq-question::after { content: '−'; }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .faq-item.open .faq-answer { max-height: 500px; }
+    
+    .faq-answer p {
+      padding: 0 24px 20px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Education Resources */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    
+    .resource-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .resource-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--blue-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    
+    .resource-card h4 { margin-bottom: 8px; }
+    .resource-card p { font-size: 14px; color: var(--muted-foreground); margin-bottom: 16px; }
+    
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    .stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .star { color: hsl(48, 96%, 53%); }
+    
+    .testimonial-card blockquote {
+      color: var(--muted-foreground);
+      margin-bottom: 24px;
+      font-style: normal;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .author-info .name { font-weight: 600; }
+    .author-info .role { font-size: 13px; color: var(--muted-foreground); }
+    
+    /* Stats Bar */
+    .stats-bar {
+      background: rgba(239, 246, 255, 0.5);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    
+    .stats-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 24px;
+      text-align: center;
+    }
+    
+    .stats-bar .value {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    
+    .stats-bar .label {
+      font-size: 13px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Trust Badges */
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted-foreground);
+    }
+    
+    .trust-badge svg { color: hsl(210, 100%, 60%); }
+    
+    /* About Section */
+    .about-list { max-width: 800px; margin: 0 auto; }
+    
+    .about-item {
+      display: flex;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .about-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--blue-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .about-item h3 { margin-bottom: 8px; }
+    .about-item p { color: var(--muted-foreground); }
+    
+    /* Disclaimer */
+    .disclaimer {
+      background: var(--muted);
+      padding: 48px 16px;
+    }
+    
+    .disclaimer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--blue-50);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+    }
+    
+    .disclaimer h4 { margin-bottom: 8px; }
+    .disclaimer p { font-size: 14px; color: var(--muted-foreground); }
+    
+    /* Footer */
+    .footer {
+      padding: 40px 16px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer p { font-size: 14px; color: var(--muted-foreground); }
+    
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mb-4 { margin-bottom: 16px; }
+    .mb-8 { margin-bottom: 32px; }
+    .mt-8 { margin-top: 32px; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-inner { height: 56px; }
+      .hero { padding: 80px 16px 40px; }
+      .live-alert-card { padding: 16px; margin: 32px 16px 0; }
+      .section { padding: 40px 16px; }
+      .cta-section { padding: 32px 20px; margin: 0; border-radius: 0; }
+      .alert-content { flex-direction: column; }
+      .alert-icon { width: 40px; height: 40px; }
+      .feature-card { padding: 20px; }
+      .about-item { flex-direction: column; }
+      .about-icon { margin-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo-group">
+          <div class="logo-placeholder">IS</div>
+          <div class="logo-text">
+            <h1>InvestorStream</h1>
+            <p>Intelligent Investments</p>
+          </div>
+        </div>
+        <a href="#signup" class="btn btn-primary">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-particles">
+        <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 25%; top: 60%; animation-delay: 0.5s;"></div>
+        <div class="particle" style="left: 45%; top: 30%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 65%; top: 70%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 80%; top: 40%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 90%; top: 15%; animation-delay: 0.3s;"></div>
+        <div class="particle" style="left: 5%; top: 80%; animation-delay: 0.8s;"></div>
+        <div class="particle" style="left: 55%; top: 85%; animation-delay: 1.2s;"></div>
+      </div>
+      
+      <div class="hero-content">
+        <span class="badge" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          IPO Intelligence Platform
+        </span>
+        
+        <h2>Never Miss the Next <span>Big IPO Opportunity</span></h2>
+        
+        <p>Get free, instant alerts on the hottest upcoming IPOs before they hit the market. Stay ahead with independent research, curated watchlists, and exclusive insights.</p>
+        
+        <a href="#signup" class="btn btn-white btn-xl">
+          <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          Get Free Alerts Now
+        </a>
+        
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Independent Research
+          </div>
+          <div class="hero-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Real-time Alerts
+          </div>
+          <div class="hero-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            10,000+ Investors
+          </div>
+        </div>
+        
+        <!-- Live Alert Card -->
+        <div class="live-alert-card">
+          <div class="live-alert-header">
+            <div class="live-indicator">
+              <div class="live-dot"></div>
+              <span style="font-weight: 600;">Live IPO Alert</span>
+            </div>
+            <span style="font-size: 14px; color: var(--muted-foreground);">2 min ago</span>
+          </div>
+          <h3>TechCorp Inc. (TECH)</h3>
+          <p>AI-powered SaaS company files for $2B IPO. Expected pricing: $18-22/share. Roadshow begins next week.</p>
+          <div class="live-alert-footer">
+            <span class="badge badge-blue">High Growth</span>
+            <a href="#sample-alerts" class="btn btn-primary">Read Full Analysis</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UK's Most Actively Traded Asset -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2>UK's Most Actively Traded Asset</h2>
+          <p>Current Market Overview (April 2025)</p>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="value">EUR/USD</div>
+            <div class="label">Forex Currency Pair</div>
+            <div class="secondary-value">$4.7T</div>
+            <div class="secondary-label">Daily UK FX Trading Volume</div>
+          </div>
+          <div class="stat-card">
+            <div class="value">38%</div>
+            <div class="label">Global Market Share</div>
+            <div class="secondary-value">London</div>
+            <div class="secondary-label">World's Leading FX Hub</div>
+          </div>
+          <div class="stat-card">
+            <div class="value">22-24%</div>
+            <div class="label">of Global FX Volume</div>
+            <div class="secondary-value">$1.7T+</div>
+            <div class="secondary-label">EUR/USD Daily Trading</div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 style="font-size: 24px; margin-bottom: 16px;">Why EUR/USD Dominates</h3>
+          <p style="color: var(--muted-foreground); margin-bottom: 24px;">
+            The Euro/US Dollar currency pair is the single most actively traded asset by volume in the UK, with trading volumes that dwarf all other asset classes combined. As of April 2025, average daily turnover in the UK's FX market reached <strong style="color: var(--foreground);">$4.745 trillion per day</strong>.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+            <div style="background: var(--muted); padding: 16px; border-radius: 8px;">
+              <h4 style="margin-bottom: 12px;">Volume Comparison</h4>
+              <ul style="list-style: none; color: var(--muted-foreground); font-size: 14px;">
+                <li style="margin-bottom: 8px;">• <strong>EUR/USD Forex:</strong> $1.7T+ daily</li>
+                <li style="margin-bottom: 8px;">• <strong>UK Gilts (Bonds):</strong> ~$50B daily</li>
+                <li style="margin-bottom: 8px;">• <strong>Top LSE Stock:</strong> ~$100M daily</li>
+                <li style="margin-bottom: 8px;">• <strong>Gold Trading:</strong> ~$24B daily</li>
+                <li>• <strong>All Crypto Markets:</strong> ~$150B daily</li>
+              </ul>
+            </div>
+            <div style="background: var(--muted); padding: 16px; border-radius: 8px;">
+              <h4 style="margin-bottom: 12px;">Recent Surge Factors</h4>
+              <ul style="list-style: none; color: var(--muted-foreground); font-size: 14px;">
+                <li style="margin-bottom: 8px;">• US trade policy announcements & tariff threats</li>
+                <li style="margin-bottom: 8px;">• Central bank interest rate decisions</li>
+                <li style="margin-bottom: 8px;">• Geopolitical tensions & macro surprises</li>
+                <li style="margin-bottom: 8px;">• 28% volume increase above 2022 levels</li>
+                <li>• Heightened volatility driving trading activity</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market Intelligence -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge mb-4">
+            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Independent Analysis
+          </span>
+          <h2>Trusted, Independent <span>Market Intelligence</span></h2>
+          <p>Investor Stream provides in-depth analysis on private companies preparing to go public. We cut through the noise to deliver concise, fact-based research that helps you understand valuation trends, growth potential, and risk factors—without the hype.</p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3>Valuation Analysis</h3>
+            <p>Deep-dive into company financials, revenue models, and market positioning to assess fair value and growth potential.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background: var(--blue-100);">
+              <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            </div>
+            <h3>Risk Assessment</h3>
+            <p>Comprehensive risk analysis covering market conditions, competitive landscape, and regulatory challenges.</p>
+          </div>
+          <div class="feature-card" style="grid-column: 1 / -1;">
+            <div class="feature-icon" style="background: var(--blue-50);">
+              <svg class="icon-xl" fill="none" stroke="hsl(199, 89%, 48%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <h3>Growth Potential</h3>
+            <p>Market opportunity analysis and growth trajectory projections based on industry trends and company fundamentals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section 1 -->
+    <section class="section">
+      <div class="cta-section">
+        <h3>Ready for Independent IPO Intelligence?</h3>
+        <p>Join thousands of investors who rely on our unbiased research and timely alerts to stay ahead of the market.</p>
+        <a href="#signup" class="btn btn-white btn-lg">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          Get Free Alerts Now
+        </a>
+      </div>
+    </section>
+
+    <!-- Sample Alerts -->
+    <section class="section section-blue" id="sample-alerts">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge-blue mb-4">
+            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            Sample Alerts
+          </span>
+          <h2 style="color: hsl(222, 47%, 11%);">See the <span style="color: hsl(210, 100%, 40%);">Alerts in Action</span></h2>
+          <p style="color: hsl(215, 16%, 47%);">Curious what our alerts look like? Here are a few examples from major IPOs that showcase the clarity and timeliness you can expect when you join Investor Stream.</p>
+        </div>
+        
+        <!-- USDT Markets Alert -->
+        <div class="alert-card">
+          <div class="alert-header">
+            <div class="alert-indicator">
+              <div class="alert-dot" style="background: var(--green-500);"></div>
+              <span style="font-weight: 600; color: hsl(222, 47%, 11%);">IPO Alert</span>
+            </div>
+            <span style="font-size: 13px; color: hsl(215, 16%, 47%);">Oct 2025</span>
+          </div>
+          <div class="alert-content">
+            <div class="alert-icon" style="background: var(--blue-100);">
+              <svg class="icon-lg" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div class="alert-body">
+              <h3>USDT Markets (USDT)</h3>
+              <span class="badge badge-blue" style="margin-bottom: 12px;">Digital Assets & Crypto</span>
+              <p>Leading digital asset exchange specializing in stablecoin trading. Platform tracks top 24h crypto gainers including SynFutures (F) +49.0%, Paparazzi Token +38.0%, and Bitlight +28.6% with advanced risk filtering.</p>
+              <div class="alert-footer">
+                <span class="alert-meta">
+                  <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                  Expected: $25-30/share
+                </span>
+                <button class="btn-link">View Analysis →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Apple Alert -->
+        <div class="alert-card">
+          <div class="alert-header">
+            <div class="alert-indicator">
+              <div class="alert-dot" style="background: hsl(217, 91%, 50%);"></div>
+              <span style="font-weight: 600; color: hsl(222, 47%, 11%);">IPO Alert</span>
+            </div>
+            <span style="font-size: 13px; color: hsl(215, 16%, 47%);">Dec 1980</span>
+          </div>
+          <div class="alert-content">
+            <div class="alert-icon" style="background: var(--blue-50);">
+              <svg class="icon-lg" fill="none" stroke="hsl(199, 89%, 48%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <div class="alert-body">
+              <h3>Apple Inc. (AAPL)</h3>
+              <span class="badge badge-blue" style="margin-bottom: 12px;">Technology</span>
+              <p>Historic IPO at $22/share on Dec 12, 1980. Opened at $22, closed around $29 on first day. Current price ~$262 represents 12× return (much higher accounting for splits). Revolutionary personal computing company.</p>
+              <div class="alert-footer">
+                <span class="alert-meta">
+                  <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                  IPO Price: $22/share
+                </span>
+                <button class="btn-link">View Analysis →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Commodities Alert -->
+        <div class="alert-card">
+          <div class="alert-header">
+            <div class="alert-indicator">
+              <div class="alert-dot" style="background: var(--amber-600);"></div>
+              <span style="font-weight: 600; color: hsl(222, 47%, 11%);">Commodity Alert</span>
+            </div>
+            <span style="font-size: 13px; color: hsl(215, 16%, 47%);">Mar 2022</span>
+          </div>
+          <div class="alert-content">
+            <div class="alert-icon" style="background: var(--amber-50);">
+              <svg class="icon-lg" fill="none" stroke="var(--amber-600)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <div class="alert-body">
+              <h3>Global Commodity Futures (GCFP)</h3>
+              <span class="badge badge-amber" style="margin-bottom: 12px;">Commodities & Agriculture</span>
+              <p>Ukraine war disrupted wheat exports causing 40% price surge by May 2022. Cocoa prices doubled since Aug 2023 due to West African supply deficits. Platform integrates geopolitical risk signals into real-time commodity trading.</p>
+              <div class="alert-footer">
+                <span class="alert-meta">
+                  <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                  Expected: $35-42/share
+                </span>
+                <button class="btn-link">View Analysis →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- What Makes Different -->
+        <div class="card mt-8">
+          <h3 style="text-align: center; font-size: 24px; margin-bottom: 48px;">What Makes Our Alerts Different</h3>
+          <div class="differentiators">
+            <div class="diff-item">
+              <div class="diff-icon">
+                <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h4>Timely Delivery</h4>
+              <p>Alerts sent before major announcements and filing updates</p>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon">
+                <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+              <h4>Deep Analysis</h4>
+              <p>Comprehensive research beyond basic filing information</p>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon">
+                <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h4>Quality Focus</h4>
+              <p>Only high-potential opportunities that meet our criteria</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="cta-section mt-8">
+          <h3>Want to See More Sample Alerts?</h3>
+          <p>Explore our complete library of past IPO alerts and see the detailed analysis that helped investors stay ahead of the market.</p>
+          <div class="cta-buttons">
+            <a href="#" class="btn btn-white btn-lg">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              View More Sample Alerts
+            </a>
+            <a href="#signup" class="btn btn-outline-white btn-lg">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+              Get Free Alerts Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge mb-4">
+            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Education Center
+          </span>
+          <h2>Your IPO Questions, <span>Answered</span></h2>
+          <p>New to IPO investing? We've got you covered. Get up to speed with our comprehensive FAQ section covering everything from basics to advanced strategies.</p>
+        </div>
+        
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">What exactly is an IPO?</button>
+            <div class="faq-answer">
+              <p>An Initial Public Offering (IPO) is when a private company first sells shares to the public on a stock exchange. This allows the company to raise capital from public investors and gives early investors and employees a way to sell their shares. IPOs are significant events that can create substantial investment opportunities for those who get in early.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">How does pre-IPO investing work?</button>
+            <div class="faq-answer">
+              <p>Pre-IPO investing involves purchasing shares in a company before it goes public. This typically happens through private placements, secondary markets, or specialized platforms. While potentially more rewarding, pre-IPO investments usually require higher minimum investments and are often limited to accredited investors. Our alerts help you identify companies preparing for IPOs so you can research opportunities early.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">How often will I get alerts?</button>
+            <div class="faq-answer">
+              <p>Alert frequency varies based on market activity, but you can typically expect 2-5 high-quality alerts per week. We prioritize quality over quantity, focusing on companies with strong fundamentals and significant market potential. During active IPO markets, you may receive more alerts, while quieter periods may see fewer but more selective opportunities.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Can I unsubscribe anytime?</button>
+            <div class="faq-answer">
+              <p>Absolutely! You can unsubscribe from our alerts at any time with a single click. There are no long-term commitments or cancellation fees. We believe in providing value that makes you want to stay, not contracts that force you to. You can also customize your alert preferences to receive only the types of opportunities that interest you most.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Do you provide investment advice?</button>
+            <div class="faq-answer">
+              <p>No. Investor Stream does not provide investment advice or recommendations to buy or sell securities. We are an educational and informational platform that provides independent research and analysis. All investment decisions should be made based on your own research and risk tolerance, preferably in consultation with a qualified financial advisor.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">What makes your research different?</button>
+            <div class="faq-answer">
+              <p>Our research is completely independent—we don't have relationships with investment banks or companies going public that could influence our analysis. We focus on fundamental analysis, market trends, and risk assessment rather than hype or speculation. Our team has extensive experience in financial analysis and public markets, ensuring you get professional-grade insights.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Education Resources -->
+        <div style="background: rgba(239, 246, 255, 0.5); border-radius: 16px; padding: 48px; margin-top: 64px;">
+          <h3 style="text-align: center; font-size: 24px; margin-bottom: 16px;">IPO Education Resources</h3>
+          <p style="text-align: center; color: var(--muted-foreground); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">Expand your knowledge with our comprehensive guides and educational content designed to help you become a more informed investor.</p>
+          
+          <div class="resources-grid">
+            <div class="resource-card">
+              <div class="resource-icon">
+                <svg class="icon-lg" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <h4>IPO Guides</h4>
+              <p>Step-by-step guides covering the IPO process</p>
+              <a href="#" class="btn-link">Learn More →</a>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">
+                <svg class="icon-lg" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h4>Video Tutorials</h4>
+              <p>Visual learning resources and market insights</p>
+              <a href="#" class="btn-link">Watch Now →</a>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">
+                <svg class="icon-lg" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <h4>Market Reports</h4>
+              <p>In-depth analysis of IPO market trends</p>
+              <a href="#" class="btn-link">Read More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section 2 -->
+    <section class="section">
+      <div class="cta-section">
+        <h3>Ready to Start Your IPO Journey?</h3>
+        <p>Join thousands of informed investors who use our alerts and research to stay ahead of the IPO market. Get started with free alerts today.</p>
+        <a href="#signup" class="btn btn-white btn-lg">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          Sign Up for Free Alerts
+        </a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge mb-4">
+            <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Client Success Stories
+          </span>
+          <h2>Trusted by <span>10,000+ Investors</span></h2>
+          <p>See what our community of investors says about the value of our independent research and timely IPO alerts.</p>
+        </div>
+        
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <blockquote>"Investor Stream's alerts helped me get in early on three major IPOs last year. Their independent analysis cuts through the hype and gives you the real story behind the numbers."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: hsl(217, 91%, 50%);">MR</div>
+              <div class="author-info">
+                <div class="name">Michael Rodriguez</div>
+                <div class="role">Portfolio Manager</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <blockquote>"The quality of research is exceptional. I've been following IPOs for 15 years, and Investor Stream provides insights I can't find anywhere else. Worth every minute of my time."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: hsl(199, 89%, 48%);">SC</div>
+              <div class="author-info">
+                <div class="name">Sarah Chen</div>
+                <div class="role">Angel Investor</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="star icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <blockquote>"Finally, an IPO service that doesn't try to sell me anything! The alerts are timely, the analysis is thorough, and the team clearly knows what they're doing."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: hsl(210, 100%, 60%);">DJ</div>
+              <div class="author-info">
+                <div class="name">David Johnson</div>
+                <div class="role">Retail Investor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Stats Bar -->
+        <div class="stats-bar mt-8">
+          <div class="stats-bar-grid">
+            <div>
+              <div class="value">10,000+</div>
+              <div class="label">Active Subscribers</div>
+            </div>
+            <div>
+              <div class="value">500+</div>
+              <div class="label">IPOs Tracked</div>
+            </div>
+            <div>
+              <div class="value">95%</div>
+              <div class="label">Satisfaction Rate</div>
+            </div>
+            <div>
+              <div class="value">24/7</div>
+              <div class="label">Market Monitoring</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            SEC Compliant
+          </div>
+          <div class="trust-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Data Protected
+          </div>
+          <div class="trust-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Independent Research
+          </div>
+          <div class="trust-badge">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Privacy First
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge mb-4">
+            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            About Investor Stream
+          </span>
+          <h2>Independent Research. <span>Unbiased Insights.</span></h2>
+          <p>Founded by experienced financial analysts and former investment bankers, Investor Stream was created to fill a critical gap in the IPO research landscape: truly independent, conflict-free analysis.</p>
+        </div>
+        
+        <div class="about-list">
+          <div class="about-item">
+            <div class="about-icon">
+              <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div>
+              <h3>No Conflicts of Interest</h3>
+              <p>We don't sell securities, manage funds, or have investment banking relationships. Our only focus is providing you with objective research.</p>
+            </div>
+          </div>
+          <div class="about-item">
+            <div class="about-icon">
+              <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <div>
+              <h3>Experienced Team</h3>
+              <p>Our analysts have decades of combined experience in investment banking, equity research, and venture capital across major financial institutions.</p>
+            </div>
+          </div>
+          <div class="about-item">
+            <div class="about-icon">
+              <svg class="icon-xl" fill="none" stroke="hsl(217, 91%, 50%)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div>
+              <h3>Data-Driven Approach</h3>
+              <p>We combine fundamental analysis with proprietary data models to identify the most promising IPO opportunities and potential risks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section" id="signup">
+      <div class="cta-section" style="padding: 64px;">
+        <h2 style="font-size: clamp(24px, 4vw, 36px); margin-bottom: 24px;">Start Receiving IPO Alerts Today</h2>
+        <p style="font-size: clamp(16px, 2vw, 20px); margin-bottom: 40px;">Join our community of informed investors. Get instant alerts on the hottest upcoming IPOs, backed by independent research you can trust.</p>
+        <a href="mailto:alerts@investorstream.com?subject=Sign%20Up%20for%20Free%20IPO%20Alerts" class="btn btn-white btn-xl">
+          <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          Get Free Alerts Now
+        </a>
+        <p style="font-size: 14px; color: hsl(210, 100%, 80%); margin-top: 24px;">No credit card required • Unsubscribe anytime • 100% free</p>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+      <div class="disclaimer-inner">
+        <svg class="icon-lg" style="color: var(--primary); flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div>
+          <h4>Important Disclaimer</h4>
+          <p><strong>Investor Stream is not a brokerage or licensed advisor.</strong> Our content is educational and informational only. We provide independent research and analysis to help you make informed decisions, but we do not provide investment advice or recommendations to buy or sell securities.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 InvestorStream. All rights reserved. | Independent IPO Research & Alerts</p>
+  </footer>
+</body>
+</html>
