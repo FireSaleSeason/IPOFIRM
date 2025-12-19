@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link, useLocation } from "react-router-dom";
 import logoImage from "@/assets/vc-logo-custom.jpeg";
-import adminAvatar from "@/assets/admin-avatar.png";
+import adminAvatar from "@/assets/admin-avatar.webp";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import {
