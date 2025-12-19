@@ -35,3 +35,7 @@ verify_jwt = false
 # Called by n8n workflow - validates X-Webhook-Token header
 # Protects GoDaddy API quota from abuse
 verify_jwt = false
+
+[functions.manage-users]
+# Admin-only function - validates JWT and checks admin role
+verify_jwt = false
