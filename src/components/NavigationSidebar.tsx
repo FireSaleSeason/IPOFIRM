@@ -27,6 +27,7 @@ const navItems: NavItem[] = [
   { name: "Marketing & Analytics", icon: BarChart3, path: "/marketing" },
   { name: "Rules & Scoring", icon: Sliders, path: "/rules-scoring" },
   { name: "Exports", icon: Download, path: "/exports" },
+  { name: "User Management", icon: Users, path: "/users" },
   { name: "Settings", icon: Settings, path: "/settings" },
 ];
 
