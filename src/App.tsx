@@ -5,8 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import Index from "./pages/Index";
-import Auth from "./pages/Auth";
+import Login from "./pages/Login";
 import Overview from "./pages/Overview";
 import DataSources from "./pages/DataSources";
 import SentimentMonitor from "./pages/SentimentMonitor";
@@ -36,7 +35,6 @@ import RulesScoring from "./pages/RulesScoring";
 import Exports from "./pages/Exports";
 import Settings from "./pages/Settings";
 import InvestorFundScraper from "./pages/InvestorFundScraper";
-import Premium from "./pages/Premium";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -54,12 +52,10 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/" element={<Index />} />
-            <Route path="/ipo-landing" element={<Index />} />
-            <Route path="/premium" element={<Premium />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/overview" element={<ProtectedRoute><Overview /></ProtectedRoute>} />
