@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import logoImage from "@/assets/vc-logo-custom.jpeg";
 import adminAvatar from "@/assets/admin-avatar.png";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +26,6 @@ const navItems: NavItem[] = [
   { name: "Sentiment Monitor", icon: TrendingUp, path: "/sentiment-monitor" },
   { name: "Marketing & Analytics", icon: BarChart3, path: "/marketing" },
   { name: "Rules & Scoring", icon: Sliders, path: "/rules-scoring" },
-  { name: "IPO Landing Page", icon: Target, path: "/ipo-landing" },
   { name: "Exports", icon: Download, path: "/exports" },
   { name: "Settings", icon: Settings, path: "/settings" },
 ];
@@ -33,6 +33,7 @@ const navItems: NavItem[] = [
 export const NavigationSidebar = () => {
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const { signOut } = useAuth();
 
   const toggleExpand = (itemName: string) => {
     setExpandedItems(prev => 
@@ -147,7 +148,10 @@ export const NavigationSidebar = () => {
               <User className="mr-2 h-4 w-4" />
               <span>Account Settings</span>
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+            <DropdownMenuItem 
+              className="cursor-pointer text-destructive focus:text-destructive"
+              onClick={() => signOut()}
+            >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log Out</span>
             </DropdownMenuItem>
