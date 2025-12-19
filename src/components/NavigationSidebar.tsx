@@ -49,9 +49,9 @@ export const NavigationSidebar = () => {
       {/* Logo */}
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <img src={logoImage} alt="Venture Capital Logo" className="w-12 h-12 object-contain" />
+          <img src={logoImage} alt="VC Scraper Bot Logo" className="w-12 h-12 object-contain" />
           <div>
-            <h1 className="text-lg font-bold text-foreground">Venture Capital</h1>
+            <h1 className="text-lg font-bold text-foreground">VC Scraper Bot</h1>
             <p className="text-xs text-muted-foreground">IPO Firm</p>
           </div>
         </div>
