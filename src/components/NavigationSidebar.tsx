@@ -52,7 +52,7 @@ export const NavigationSidebar = () => {
           <img src={logoImage} alt="VC Scraper Bot Logo" className="w-12 h-12 object-contain" />
           <div>
             <h1 className="text-lg font-bold text-foreground">VC Scraper Bot</h1>
-            <p className="text-xs text-muted-foreground">IPO Firm</p>
+            <p className="text-xs text-muted-foreground">Entity Intelligence</p>
           </div>
         </div>
       </div>
