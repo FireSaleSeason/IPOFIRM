@@ -53,10 +53,10 @@ export default function Login() {
     });
 
     if (error) {
-      // Generic error message - do not reveal if email exists
+      console.error("Login error:", error);
       toast({
         title: "Authentication Failed",
-        description: "Invalid credentials. Please try again.",
+        description: `${error.message} (Code: ${error.status || 'unknown'})`,
         variant: "destructive",
       });
     } else {
