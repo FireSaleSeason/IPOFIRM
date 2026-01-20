@@ -56,39 +56,39 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/overview" element={<ProtectedRoute><Overview /></ProtectedRoute>} />
-            <Route path="/data-sources" element={<ProtectedRoute><DataSources /></ProtectedRoute>} />
-            <Route path="/sentiment-monitor" element={<ProtectedRoute><SentimentMonitor /></ProtectedRoute>} />
-            <Route path="/investor-fund-scraper" element={<ProtectedRoute><InvestorFundScraper /></ProtectedRoute>} />
-            <Route path="/lead-generation" element={<ProtectedRoute><LeadGeneration /></ProtectedRoute>} />
-            <Route path="/crm" element={<ProtectedRoute><CRM /></ProtectedRoute>} />
-            <Route path="/marketing" element={<ProtectedRoute><Marketing /></ProtectedRoute>} />
-            <Route path="/content-library" element={<ProtectedRoute><ContentLibrary /></ProtectedRoute>} />
-            <Route path="/data-normalization" element={<ProtectedRoute><DataNormalization /></ProtectedRoute>} />
-            <Route path="/rules-scoring" element={<ProtectedRoute><RulesScoring /></ProtectedRoute>} />
-            <Route path="/registry-management" element={<ProtectedRoute><RegistryManagement /></ProtectedRoute>} />
-            <Route path="/exports" element={<ProtectedRoute><Exports /></ProtectedRoute>} />
-            <Route path="/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
-            <Route path="/knowledge" element={<ProtectedRoute><Knowledge /></ProtectedRoute>} />
-            <Route path="/workflow-builder" element={<ProtectedRoute><WorkflowBuilder /></ProtectedRoute>} />
-            <Route path="/ai-agent" element={<ProtectedRoute><AIAgent /></ProtectedRoute>} />
-            <Route path="/ai-training" element={<ProtectedRoute><AITraining /></ProtectedRoute>} />
-            <Route path="/task-scheduler" element={<ProtectedRoute><TaskScheduler /></ProtectedRoute>} />
-            <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
-            <Route path="/pipeline-performance" element={<ProtectedRoute><PipelinePerformance /></ProtectedRoute>} />
-            <Route path="/communication-logs" element={<ProtectedRoute><CommunicationLogs /></ProtectedRoute>} />
-            <Route path="/integration-logs" element={<ProtectedRoute><IntegrationLogs /></ProtectedRoute>} />
-            <Route path="/system-health" element={<ProtectedRoute><SystemHealth /></ProtectedRoute>} />
-            <Route path="/performance" element={<ProtectedRoute><Performance /></ProtectedRoute>} />
-            <Route path="/feedback" element={<ProtectedRoute><Feedback /></ProtectedRoute>} />
-            <Route path="/credential-vault" element={<ProtectedRoute><CredentialVault /></ProtectedRoute>} />
-            <Route path="/compliance" element={<ProtectedRoute><Compliance /></ProtectedRoute>} />
-            <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-            <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
-            <Route path="/users" element={<ProtectedRoute><UserManagement /></ProtectedRoute>} />
+            <Route path="/" element={<Navigate to="/overview" replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/overview" element={<Overview />} />
+            <Route path="/data-sources" element={<DataSources />} />
+            <Route path="/sentiment-monitor" element={<SentimentMonitor />} />
+            <Route path="/investor-fund-scraper" element={<InvestorFundScraper />} />
+            <Route path="/lead-generation" element={<LeadGeneration />} />
+            <Route path="/crm" element={<CRM />} />
+            <Route path="/marketing" element={<Marketing />} />
+            <Route path="/content-library" element={<ContentLibrary />} />
+            <Route path="/data-normalization" element={<DataNormalization />} />
+            <Route path="/rules-scoring" element={<RulesScoring />} />
+            <Route path="/registry-management" element={<RegistryManagement />} />
+            <Route path="/exports" element={<Exports />} />
+            <Route path="/documents" element={<Documents />} />
+            <Route path="/knowledge" element={<Knowledge />} />
+            <Route path="/workflow-builder" element={<WorkflowBuilder />} />
+            <Route path="/ai-agent" element={<AIAgent />} />
+            <Route path="/ai-training" element={<AITraining />} />
+            <Route path="/task-scheduler" element={<TaskScheduler />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/pipeline-performance" element={<PipelinePerformance />} />
+            <Route path="/communication-logs" element={<CommunicationLogs />} />
+            <Route path="/integration-logs" element={<IntegrationLogs />} />
+            <Route path="/system-health" element={<SystemHealth />} />
+            <Route path="/performance" element={<Performance />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/credential-vault" element={<CredentialVault />} />
+            <Route path="/compliance" element={<Compliance />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/users" element={<UserManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
