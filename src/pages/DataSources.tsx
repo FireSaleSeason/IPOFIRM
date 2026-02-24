@@ -8,7 +8,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Play, ChevronRight, CheckCircle2, XCircle, Clock, Trash2 } from "lucide-react";
+import { Loader2, Play, ChevronRight, CheckCircle2, XCircle, Clock, Trash2, MoreVertical } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useScrapingJobs } from "@/hooks/useScrapingJobs";
 import { RecentEntitiesPreview } from "@/components/RecentEntitiesPreview";
 import { useCleanupJobs } from "@/hooks/useCleanupJobs";
@@ -200,25 +206,23 @@ const DataSources = () => {
                       {activeJobs > 0 ? `${activeJobs} job${activeJobs > 1 ? 's' : ''} currently running` : 'View recent scraping activity'}
                     </CardDescription>
                   </div>
-                  <Button
-                    onClick={cleanupStaleJobs}
-                    disabled={isCleaningUp}
-                    variant="destructive"
-                    size="sm"
-                    className="shrink-0"
-                  >
-                    {isCleaningUp ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Cleaning...
-                      </>
-                    ) : (
-                      <>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="shrink-0">
+                        <MoreVertical className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem
+                        onClick={cleanupStaleJobs}
+                        disabled={isCleaningUp}
+                        className="text-destructive focus:text-destructive"
+                      >
                         <Trash2 className="w-4 h-4 mr-2" />
-                        Clear Stuck Jobs
-                      </>
-                    )}
-                  </Button>
+                        {isCleaningUp ? "Cleaning..." : "Clear Stuck Jobs"}
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </CardHeader>
               <CardContent>

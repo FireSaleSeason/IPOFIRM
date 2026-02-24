@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
+import { Progress } from "@/components/ui/progress";
 import {
   Table,
   TableBody,
@@ -51,17 +50,7 @@ const defaultCriteria: ScoringCriteria[] = [
 ];
 
 export function ScoringLegend() {
-  const [weights, setWeights] = useState<number[]>(
-    defaultCriteria.map(c => c.weight)
-  );
-
-  const handleWeightChange = (index: number, value: number[]) => {
-    const newWeights = [...weights];
-    newWeights[index] = value[0];
-    setWeights(newWeights);
-  };
-
-  const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+  const totalWeight = defaultCriteria.reduce((sum, c) => sum + c.weight, 0);
 
   return (
     <Card className="p-6">
@@ -91,16 +80,9 @@ export function ScoringLegend() {
                 <TableCell>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold">{weights[index]} pts</span>
+                      <span className="text-sm font-semibold">{criteria.weight} pts</span>
                     </div>
-                    <Slider
-                      value={[weights[index]]}
-                      onValueChange={(value) => handleWeightChange(index, value)}
-                      max={100}
-                      min={0}
-                      step={5}
-                      className="w-full"
-                    />
+                    <Progress value={criteria.weight} className="h-2" />
                   </div>
                 </TableCell>
                 <TableCell className="text-sm">{criteria.scoringLogic}</TableCell>
