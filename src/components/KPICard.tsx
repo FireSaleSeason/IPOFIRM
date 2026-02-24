@@ -10,10 +10,10 @@ interface KPICardProps {
 
 export const KPICard = ({ title, value, subtitle, icon: Icon, variant = "default" }: KPICardProps) => {
   const variantStyles = {
-    default: "from-primary/20 to-primary/5 text-primary",
-    success: "from-success/20 to-success/5 text-success",
-    warning: "from-warning/20 to-warning/5 text-warning",
-    purple: "from-primary-glow/20 to-primary-glow/5 text-primary-glow",
+    default: "from-primary/15 to-primary/5 text-primary",
+    success: "from-success/15 to-success/5 text-success",
+    warning: "from-muted to-muted/50 text-muted-foreground",
+    purple: "from-primary-glow/15 to-primary-glow/5 text-primary-glow",
   };
 
   return (

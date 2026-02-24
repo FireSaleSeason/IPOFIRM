@@ -37,7 +37,7 @@ export const DataSourceGrid = ({ selectedSource, onSelectSource }: DataSourceGri
               selectedSource === source.id
                 ? "border-primary bg-primary/10 shadow-lg shadow-primary/20"
                 : source.comingSoon
-                ? "border-border bg-muted/30 opacity-50 cursor-not-allowed"
+                ? "border-border bg-muted/50 opacity-40 cursor-not-allowed grayscale"
                 : "border-border bg-card hover:border-primary/50 hover:bg-card/80"
             }`}
           >

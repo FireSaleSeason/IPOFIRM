@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { AlertTriangle, CheckCircle, Search, TrendingDown, TrendingUp, ArrowLeft } from "lucide-react";
+import { CheckCircle, Search, TrendingDown, TrendingUp, ArrowLeft, Shield, FileText } from "lucide-react";
 import { format } from "date-fns";
 
 export default function SentimentMonitor() {
@@ -134,9 +134,12 @@ export default function SentimentMonitor() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Blocked</p>
-              <p className="text-3xl font-bold text-destructive">{stats?.blocked || 0}</p>
+              <p className="text-3xl font-bold text-foreground">{stats?.blocked || 0}</p>
+              {(stats?.blocked || 0) > 0 && (
+                <p className="text-xs text-muted-foreground mt-1">Requires review</p>
+              )}
             </div>
-            <AlertTriangle className="w-8 h-8 text-destructive" />
+            <Shield className="w-8 h-8 text-muted-foreground" />
           </div>
         </Card>
 
@@ -144,11 +147,11 @@ export default function SentimentMonitor() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Block Rate</p>
-              <p className="text-3xl font-bold text-warning">
+              <p className="text-3xl font-bold text-foreground">
                 {stats?.blockRate.toFixed(1) || 0}%
               </p>
             </div>
-            <TrendingDown className="w-8 h-8 text-warning" />
+            <TrendingDown className="w-8 h-8 text-muted-foreground" />
           </div>
         </Card>
 
@@ -156,9 +159,12 @@ export default function SentimentMonitor() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Negative Press Blocks</p>
-              <p className="text-3xl font-bold text-destructive">{negativeBlocks.length}</p>
+              <p className="text-3xl font-bold text-foreground">{negativeBlocks.length}</p>
+              {negativeBlocks.length === 0 && (
+                <p className="text-xs text-muted-foreground mt-1">No issues detected</p>
+              )}
             </div>
-            <AlertTriangle className="w-8 h-8 text-destructive" />
+            <FileText className="w-8 h-8 text-muted-foreground" />
           </div>
         </Card>
       </div>
