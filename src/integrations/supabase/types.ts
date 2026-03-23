@@ -434,6 +434,36 @@ export type Database = {
           },
         ]
       }
+      filter_rules: {
+        Row: {
+          created_at: string
+          description: string | null
+          enabled: boolean
+          id: string
+          label: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          enabled?: boolean
+          id?: string
+          label?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          enabled?: boolean
+          id?: string
+          label?: string | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       filtering_audit: {
         Row: {
           articles_found: number | null
@@ -601,6 +631,39 @@ export type Database = {
           name?: string
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      scoring_rules: {
+        Row: {
+          created_at: string
+          description: string | null
+          enabled: boolean
+          id: string
+          name: string
+          sort_order: number
+          updated_at: string
+          weight: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          enabled?: boolean
+          id?: string
+          name: string
+          sort_order?: number
+          updated_at?: string
+          weight?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          enabled?: boolean
+          id?: string
+          name?: string
+          sort_order?: number
+          updated_at?: string
+          weight?: number
         }
         Relationships: []
       }
