@@ -37,29 +37,34 @@ export const NavigationSidebar = () => {
   const { signOut } = useAuth();
 
   const toggleExpand = (itemName: string) => {
-    setExpandedItems(prev => 
-      prev.includes(itemName) 
+    setExpandedItems(prev =>
+      prev.includes(itemName)
         ? prev.filter(name => name !== itemName)
         : [...prev, itemName]
     );
   };
 
   return (
-    <aside className="w-[220px] h-screen bg-sidebar border-r border-sidebar-border flex flex-col sticky top-0">
+    <aside className="w-[220px] h-screen bg-sidebar flex flex-col sticky top-0 shadow-sidebar z-20">
+      {/* Top accent line */}
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
       {/* Logo */}
-      <div className="p-6 border-b border-sidebar-border">
+      <div className="p-5 border-b border-sidebar-border/60 bg-gradient-to-r from-primary/5 to-transparent">
         <div className="flex items-center gap-3">
-          <img src={logoImage} alt="VC Scraper Bot Logo" className="w-12 h-12 object-contain" />
+          <div className="relative">
+            <div className="absolute inset-0 rounded-lg bg-primary/20 blur-md" />
+            <img src={logoImage} alt="VC Scraper Bot Logo" className="relative w-10 h-10 object-contain rounded-lg" />
+          </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground">VC Scraper Bot</h1>
-            <p className="text-xs text-muted-foreground">Entity Intelligence</p>
+            <h1 className="text-sm font-bold text-foreground tracking-tight">VC Scraper Bot</h1>
+            <p className="text-[10px] text-primary/70 font-medium tracking-widest uppercase">Entity Intelligence</p>
           </div>
         </div>
       </div>
 
-
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
@@ -73,20 +78,20 @@ export const NavigationSidebar = () => {
                 <>
                   <button
                     onClick={() => toggleExpand(item.name)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
                       isActive || isChildActive
-                        ? "bg-sidebar-accent text-sidebar-primary font-medium shadow-md"
+                        ? "nav-item-active font-medium"
                         : item.name === "ANDREW'S EXTRAS"
-                        ? "text-red-500 hover:bg-sidebar-accent/50"
-                        : "text-sidebar-foreground hover:bg-sidebar-accent/50"
+                        ? "text-red-400 hover:bg-sidebar-accent/60"
+                        : "text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="text-sm flex-1 text-left">{item.name}</span>
-                    <ChevronRight className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                    <Icon className="w-4 h-4 shrink-0" />
+                    <span className="text-xs flex-1 text-left">{item.name}</span>
+                    <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
                   </button>
                   {isExpanded && (
-                    <div className="ml-6 mt-1 space-y-1">
+                    <div className="ml-5 mt-0.5 space-y-0.5 border-l border-sidebar-border/40 pl-2">
                       {item.children.map((child) => {
                         const ChildIcon = child.icon;
                         const isChildItemActive = location.pathname === child.path;
@@ -94,14 +99,14 @@ export const NavigationSidebar = () => {
                           <Link
                             key={child.name}
                             to={child.path}
-                            className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-all ${
+                            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
                               isChildItemActive
-                                ? "bg-sidebar-accent text-sidebar-primary font-medium"
-                                : "text-sidebar-foreground hover:bg-sidebar-accent/50"
+                                ? "nav-item-active font-medium"
+                                : "text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
                             }`}
                           >
-                            <ChildIcon className="w-4 h-4" />
-                            <span className="text-sm">{child.name}</span>
+                            <ChildIcon className="w-3.5 h-3.5 shrink-0" />
+                            <span className="text-xs">{child.name}</span>
                           </Link>
                         );
                       })}
@@ -111,16 +116,16 @@ export const NavigationSidebar = () => {
               ) : (
                 <Link
                   to={item.path}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "bg-sidebar-accent text-sidebar-primary font-medium shadow-md"
+                      ? "nav-item-active font-medium"
                       : item.name === "ANDREW'S EXTRAS"
-                      ? "text-red-500 hover:bg-sidebar-accent/50"
-                      : "text-sidebar-foreground hover:bg-sidebar-accent/50"
+                      ? "text-red-400 hover:bg-sidebar-accent/60"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span className="text-sm">{item.name}</span>
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs">{item.name}</span>
                 </Link>
               )}
             </div>
@@ -128,20 +133,23 @@ export const NavigationSidebar = () => {
         })}
       </nav>
 
-      {/* User Profile Dropdown at Bottom */}
-      <div className="p-4 border-t border-sidebar-border">
+      {/* User Profile Dropdown */}
+      <div className="p-3 border-t border-sidebar-border/60 bg-gradient-to-t from-black/20 to-transparent">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-sidebar-accent transition-colors">
-              <Avatar className="w-10 h-10">
-                <AvatarImage src={adminAvatar} />
-                <AvatarFallback>AD</AvatarFallback>
-              </Avatar>
-              <div className="flex-1 text-left">
-                <p className="text-sm font-medium text-foreground">Administration</p>
-                <p className="text-xs text-muted-foreground">admin@vc.com</p>
+            <button className="w-full flex items-center gap-3 p-2.5 rounded-lg hover:bg-sidebar-accent/60 transition-all duration-200 group">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-primary/15 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Avatar className="relative w-8 h-8">
+                  <AvatarImage src={adminAvatar} />
+                  <AvatarFallback className="text-xs bg-primary/20 text-primary">AD</AvatarFallback>
+                </Avatar>
               </div>
-              <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              <div className="flex-1 text-left min-w-0">
+                <p className="text-xs font-semibold text-foreground truncate">Administration</p>
+                <p className="text-[10px] text-muted-foreground truncate">admin@vc.com</p>
+              </div>
+              <ChevronDown className="w-3 h-3 text-muted-foreground shrink-0" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
@@ -149,7 +157,7 @@ export const NavigationSidebar = () => {
               <User className="mr-2 h-4 w-4" />
               <span>Account Settings</span>
             </DropdownMenuItem>
-            <DropdownMenuItem 
+            <DropdownMenuItem
               className="cursor-pointer text-destructive focus:text-destructive"
               onClick={() => signOut()}
             >

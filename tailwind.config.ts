@@ -76,34 +76,44 @@ export default {
         'gradient-bg': 'var(--gradient-bg)',
       },
       backdropBlur: {
-        'glass': '12px',
+        'glass': '16px',
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        'depth-sm': '0 1px 2px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.04)',
+        'depth': '0 2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 20px 40px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.05)',
+        'depth-lg': '0 4px 8px rgba(0,0,0,0.7), 0 16px 32px rgba(0,0,0,0.45), 0 32px 64px rgba(0,0,0,0.3), 0 0 48px rgba(26,143,255,0.06)',
+        'glow-blue': '0 0 20px rgba(26,143,255,0.35), 0 0 60px rgba(26,143,255,0.12), 0 0 0 1px rgba(26,143,255,0.2)',
+        'glow-gold': '0 0 20px rgba(240,180,41,0.3), 0 0 60px rgba(240,180,41,0.1), 0 0 0 1px rgba(240,180,41,0.2)',
+        'sidebar': '4px 0 24px rgba(0,0,0,0.7), 4px 0 8px rgba(0,0,0,0.5), 1px 0 0 rgba(26,143,255,0.14)',
+      },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "mesh-drift": {
+          "0%, 100%": { "background-position": "0% 50%" },
+          "50%": { "background-position": "100% 50%" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.6", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.02)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "mesh-drift": "mesh-drift 25s ease-in-out infinite alternate",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
       },
     },
   },

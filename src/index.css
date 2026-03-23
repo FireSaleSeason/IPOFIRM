@@ -6,89 +6,51 @@
 
 @layer base {
   :root {
-    /* Professional Light Theme — Finance/Bloomberg inspired */
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
-    --primary: 215 65% 45%;
+    /* Dark Premium Theme — Bloomberg / Palantir / Fintech */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 92%;
+    --card: 222 40% 11%;
+    --card-foreground: 210 40% 92%;
+    --popover: 222 38% 13%;
+    --popover-foreground: 210 40% 92%;
+    --primary: 210 100% 56%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 215 70% 55%;
-    --secondary: 210 15% 93%;
-    --secondary-foreground: 215 25% 20%;
-    --muted: 210 15% 93%;
-    --muted-foreground: 215 12% 50%;
-    --accent: 215 65% 45%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 65% 50%;
+    --primary-glow: 210 100% 68%;
+    --secondary: 222 30% 16%;
+    --secondary-foreground: 210 30% 80%;
+    --muted: 222 25% 18%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 45 90% 52%;
+    --accent-foreground: 222 47% 7%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 210 15% 88%;
-    --input: 210 15% 90%;
-    --ring: 215 65% 45%;
-    --radius: 0.5rem;
-    
-    --success: 152 60% 40%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 80% 48%;
-    --warning-foreground: 0 0% 100%;
-    --info: 210 90% 50%;
-    --info-foreground: 0 0% 100%;
-    
-    /* Dark sidebar for hybrid look */
-    --sidebar-background: 215 25% 18%;
-    --sidebar-foreground: 210 15% 90%;
-    --sidebar-primary: 210 15% 95%;
-    --sidebar-primary-foreground: 215 25% 18%;
-    --sidebar-accent: 215 20% 25%;
-    --sidebar-accent-foreground: 210 15% 95%;
-    --sidebar-border: 215 18% 28%;
-    --sidebar-ring: 215 65% 45%;
-    
-    --gradient-primary: linear-gradient(135deg, hsl(215, 65%, 45%) 0%, hsl(215, 60%, 38%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(210, 20%, 98%) 0%, hsl(210, 18%, 95%) 50%, hsl(210, 15%, 97%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(215, 65%, 45%) 0%, hsl(215, 60%, 40%) 100%);
-    --gradient-bg: linear-gradient(180deg, hsl(210, 20%, 98%) 0%, hsl(210, 15%, 95%) 100%);
-  }
+    --border: 222 25% 18%;
+    --input: 222 30% 14%;
+    --ring: 210 100% 56%;
+    --radius: 0.625rem;
 
-  .dark {
-    --background: 215 22% 14%;
-    --foreground: 210 15% 92%;
-    --card: 215 20% 18%;
-    --card-foreground: 210 15% 92%;
-    --popover: 215 20% 18%;
-    --popover-foreground: 210 15% 92%;
-    --primary: 215 65% 55%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 215 70% 65%;
-    --secondary: 215 18% 24%;
-    --secondary-foreground: 210 15% 90%;
-    --muted: 215 15% 25%;
-    --muted-foreground: 210 10% 60%;
-    --accent: 215 65% 55%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 65% 50%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 215 15% 28%;
-    --input: 215 15% 22%;
-    --ring: 215 65% 55%;
-    
-    --success: 152 60% 40%;
+    --success: 152 60% 42%;
     --success-foreground: 0 0% 100%;
-    --warning: 38 80% 48%;
+    --warning: 38 85% 52%;
     --warning-foreground: 0 0% 100%;
-    --info: 210 90% 50%;
+    --info: 210 90% 56%;
     --info-foreground: 0 0% 100%;
-    
-    --sidebar-background: 215 25% 12%;
-    --sidebar-foreground: 210 15% 90%;
-    --sidebar-primary: 210 15% 95%;
-    --sidebar-primary-foreground: 215 25% 12%;
-    --sidebar-accent: 215 20% 18%;
-    --sidebar-accent-foreground: 210 15% 95%;
-    --sidebar-border: 215 18% 20%;
-    --sidebar-ring: 215 65% 55%;
+
+    /* Sidebar — deepest layer */
+    --sidebar-background: 222 50% 5%;
+    --sidebar-foreground: 210 20% 82%;
+    --sidebar-primary: 210 100% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 35% 12%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 222 28% 14%;
+    --sidebar-ring: 210 100% 56%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210,100%,56%) 0%, hsl(240,80%,55%) 100%);
+    --gradient-bg: linear-gradient(180deg, hsl(222,47%,7%) 0%, hsl(222,40%,9%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(210,100%,56%) 0%, hsl(210,100%,44%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222,47%,7%) 0%, hsl(222,40%,11%) 100%);
   }
 }
 
@@ -99,10 +61,117 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background:
+      radial-gradient(ellipse at 15% 40%, rgba(26, 143, 255, 0.10) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(100, 60, 220, 0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 85%, rgba(26, 143, 255, 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 65%, rgba(240, 180, 41, 0.04) 0%, transparent 45%),
+      hsl(222, 47%, 7%);
+    background-attachment: fixed;
   }
 }
 
-/* Hero particles animation */
+/* ============================================
+   3D DEPTH SHADOW SYSTEM
+   ============================================ */
+@layer utilities {
+  .shadow-depth-sm {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.5),
+      0 4px 8px rgba(0, 0, 0, 0.35),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .shadow-depth {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.6),
+      0 8px 16px rgba(0, 0, 0, 0.4),
+      0 20px 40px rgba(0, 0, 0, 0.25),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 0 24px rgba(26, 143, 255, 0.04);
+  }
+
+  .shadow-depth-lg {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.7),
+      0 16px 32px rgba(0, 0, 0, 0.45),
+      0 32px 64px rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 0 48px rgba(26, 143, 255, 0.06);
+  }
+
+  .shadow-glow-blue {
+    box-shadow:
+      0 0 20px rgba(26, 143, 255, 0.35),
+      0 0 60px rgba(26, 143, 255, 0.12),
+      0 0 0 1px rgba(26, 143, 255, 0.2);
+  }
+
+  .shadow-glow-gold {
+    box-shadow:
+      0 0 20px rgba(240, 180, 41, 0.3),
+      0 0 60px rgba(240, 180, 41, 0.1),
+      0 0 0 1px rgba(240, 180, 41, 0.2);
+  }
+
+  .shadow-sidebar {
+    box-shadow:
+      4px 0 24px rgba(0, 0, 0, 0.7),
+      4px 0 8px rgba(0, 0, 0, 0.5),
+      1px 0 0 rgba(26, 143, 255, 0.14);
+  }
+}
+
+/* ============================================
+   3D CARD TILT ON HOVER
+   ============================================ */
+.card-3d {
+  transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-3d:hover {
+  transform: perspective(900px) rotateX(-3deg) rotateY(3deg) translateZ(8px);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.65),
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    -6px 6px 24px rgba(26, 143, 255, 0.10),
+    inset 0 0 0 1px rgba(26, 143, 255, 0.18);
+}
+
+/* ============================================
+   ACTIVE NAVIGATION ITEM GLOW STYLE
+   ============================================ */
+.nav-item-active {
+  background: linear-gradient(135deg, rgba(26, 143, 255, 0.20), rgba(26, 143, 255, 0.08));
+  border-left: 2px solid hsl(210, 100%, 56%);
+  padding-left: calc(1rem - 2px);
+  box-shadow:
+    0 0 12px rgba(26, 143, 255, 0.15),
+    inset 0 0 8px rgba(26, 143, 255, 0.05);
+  color: hsl(210, 100%, 70%);
+}
+
+/* ============================================
+   GRADIENT MESH BACKGROUND (animated)
+   ============================================ */
+@keyframes meshDrift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================
+   EXISTING ANIMATIONS (preserved)
+   ============================================ */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
@@ -127,16 +196,16 @@
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out;
   }
-  
+
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out;
   }
-  
+
   .delay-200 {
     animation-delay: 0.2s;
     animation-fill-mode: both;
   }
-  
+
   .delay-300 {
     animation-delay: 0.3s;
     animation-fill-mode: both;
@@ -144,12 +213,8 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes fadeInUp {
@@ -161,4 +226,48 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ============================================
+   PREMIUM GLASS CARD SURFACE
+   ============================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ============================================
+   TOP ACCENT LINE (used on KPI cards etc.)
+   ============================================ */
+.accent-line-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(26, 143, 255, 0.6), transparent);
+}
+
+/* ============================================
+   SCROLLBAR STYLING (premium dark)
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(222, 47%, 7%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 143, 255, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 143, 255, 0.4);
 }
