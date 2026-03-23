@@ -19,7 +19,7 @@ const Settings = () => {
     systemUpdates: false
   });
 
-  const [webhookUrl, setWebhookUrl] = useState("https://n8n-ffai-u38114.vm.elestio.app/webhook-test/vc-registry-scraper");
+  const [webhookUrl, setWebhookUrl] = useState(import.meta.env.VITE_N8N_WEBHOOK_URL ?? "");
   
   const [twilioConfig, setTwilioConfig] = useState({
     accountSid: "",
